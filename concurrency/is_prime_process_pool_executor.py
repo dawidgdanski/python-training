@@ -1,4 +1,3 @@
-# ch1/example1.py
 from concurrent.futures import as_completed
 from concurrent.futures.process import ProcessPoolExecutor
 from math import sqrt
@@ -23,13 +22,13 @@ def is_prime(x):
     return x
 
 
-input = [i for i in range(10 ** 13, 10 ** 13 + 500)]
+input_data = [i for i in range(10 ** 13, 10 ** 13 + 500)]
 
 # sequential
 # comment out to only run concurrent
 start = timer()
 result = []
-for i in input:
+for i in input_data:
     if is_prime(i):
         result.append(i)
 print('Sequential processing result:', result)
@@ -40,7 +39,7 @@ print('Took: %.2f seconds.' % (timer() - start))
 start = timer()
 result = []
 with ProcessPoolExecutor(max_workers=20) as executor:
-    futures = [executor.submit(is_prime, i) for i in input]
+    futures = [executor.submit(is_prime, i) for i in input_data]
 
     for i, future in enumerate(as_completed(futures)):
         if future.result():

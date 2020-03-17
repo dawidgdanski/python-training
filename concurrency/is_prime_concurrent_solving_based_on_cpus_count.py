@@ -1,5 +1,3 @@
-# ch2/example1.py
-
 import concurrent.futures
 import multiprocessing
 from math import sqrt

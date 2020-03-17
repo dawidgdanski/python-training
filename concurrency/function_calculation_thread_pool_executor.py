@@ -1,5 +1,3 @@
-# ch1/example2.py
-
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from timeit import default_timer as timer
 
