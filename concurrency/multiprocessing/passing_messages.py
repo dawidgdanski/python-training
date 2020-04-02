@@ -15,6 +15,11 @@ class Consumer(multiprocessing.Process):
         while not self.task_queue.empty():
             temp_task = self.task_queue.get()
 
+            if temp_task is None:
+                print('Exiting %s...' % pname)
+                self.task_queue.task_done()
+                break
+
             print('%s processing task: %s' % (pname, temp_task))
 
             answer = temp_task.process()
@@ -63,6 +68,9 @@ if __name__ == "__main__":
     my_input = [2, 36, 101, 193, 323, 513, 1327, 100000, 9999999, 433785907]
     for item in my_input:
         tasks.put(Task(item))
+
+    for i in range(n_consumers):
+        tasks.put(None)
 
     tasks.join()
 
