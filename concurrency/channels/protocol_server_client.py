@@ -10,6 +10,7 @@ class EchoServerClientProtocol(asyncio.Protocol):
     def data_received(self, data):
         message = data.decode()
         print('Data received: {!r}'.format(message))
+        self.transport.write(('Echoed back: {}'.format(message)).encode())
 
 
 if __name__ == "__main__":
